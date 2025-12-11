@@ -24,16 +24,15 @@ func main() {
 	splits := 0
 	for scanner.Scan() {
 		for i, r := range scanner.Text() {
-			if r == '^' {
-				if val, ok := beams[i]; ok {
-					// There is a beam above, remove this
-					delete(beams, i)
+			val, ok := beams[i]
+			if r == '^' && ok {
+				// There is a beam above, remove this
+				delete(beams, i)
 
-					// Also create two new beams, if needed
-					beams[i-1] = val + beams[i-1]
-					beams[i+1] = val + beams[i+1]
-					splits++
-				}
+				// Also create two new beams, if needed
+				beams[i-1] = val + beams[i-1]
+				beams[i+1] = val + beams[i+1]
+				splits++
 			}
 		}
 	}
