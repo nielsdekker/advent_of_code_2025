@@ -14,17 +14,17 @@ func main() {
 	for i, r := range scanner.Text() {
 		if r == 'S' {
 			beams[i] = 1
+			break
 		}
 	}
 
-	// For this we basically only need to know how many ways we can get to a
+	// For part two we basically only need to know how many ways we can get to a
 	// certain spot. Then we can just sum the number of ways at the end and get
 	// the answer.
 	splits := 0
 	for scanner.Scan() {
 		for i, r := range scanner.Text() {
-			switch r {
-			case '^':
+			if r == '^' {
 				if val, ok := beams[i]; ok {
 					// There is a beam above, remove this
 					delete(beams, i)
